@@ -1,0 +1,188 @@
+:root {
+  --bg: #fff;
+  --fg: #111;
+
+  --primary-base: #1e90ff;
+  --primary-text: #0643a5;
+  --primary-fg: #fff;
+
+  --neutral-darkest: #000;
+  --neutral-darker: #222;
+  --neutral-dark: #444;
+  --neutral-base: #666;
+  --neutral-light: #999;
+  --neutral-lighter: #ccc;
+  --neutral-lightest: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111;
+    --fg: #fff;
+
+    --primary-base: #0643a5;
+    --primary-text: #1e90ff;
+    --primary-fg: #fff;
+
+    --neutral-darkest: #eee;
+    --neutral-darker: #ccc;
+    --neutral-dark: #999;
+    --neutral-base: #666;
+    --neutral-light: #444;
+    --neutral-lighter: #222;
+    --neutral-lightest: #000;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background: var(--bg);
+  color: var(--fg);
+}
+
+svg path {
+  fill: var(--fg);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next,
+.app {
+  height: 100%;
+}
+.app > main {
+  padding: 16px;
+}
+.app > main > .content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.app > main > .content a {
+  color: var(--primary-text);
+  text-decoration: underline;
+}
+
+.app > header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--neutral-lighter);
+  overflow-y: auto;
+}
+.app > header > div:last-child {
+  border-top: 1px solid var(--neutral-lighter);
+}
+.app > header a {
+  display: block;
+  position: relative;
+  padding: 16px 24px;
+  z-index: 2;
+  transition: all 0.2s ease-out;
+}
+
+.app > header a:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 6px;
+  top: 0;
+  left: -7px;
+  border-radius: 0 3px 3px 0;
+  background: var(--primary-base);
+  transform: translateX(0);
+  transition: transform 0.2s ease-out;
+}
+.app > header a.selected {
+  color: var(--fg);
+}
+.app > header a.selected:after {
+  transform: translateX(100%);
+}
+.app > header a:hover {
+  opacity: 1;
+}
+.app > header a.home-link {
+  padding: 24px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .app > header {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    left: -100%;
+    transform: translate3d(0, 0, 0);
+    z-index: 100;
+    transition: transform 0.3s ease-out;
+    background: var(--bg);
+    padding-top: 32px;
+  }
+  .app > .mobileMenuOpen {
+    transform: translate3d(100%, 0, 0);
+  }
+  .mobileMenuButton,
+  .mobileMenuButton:after {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 200;
+
+    appearance: none;
+    background: none;
+    padding: 8px 8px 4px;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+  }
+  .mobileMenuButton:after {
+    content: "";
+    background: var(--bg);
+    opacity: 0.6;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Just above tablet */
+@media screen and (min-width: 769px) {
+  .mobileMenuButton {
+    display: none;
+  }
+
+  .app.withHeader {
+    display: grid;
+    grid-template-columns: 280px auto;
+  }
+
+  .app > main {
+    padding: 0 32px;
+  }
+}
